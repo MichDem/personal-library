@@ -1,6 +1,5 @@
 package pl.miku.personallibrary.core.custommer.web;
 
-import pl.miku.personallibrary.core.contactInfo.ContactInfo;
 import pl.miku.personallibrary.core.contactInfo.web.ContactInfoView;
 
 import java.util.Set;

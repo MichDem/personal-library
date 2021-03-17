@@ -4,7 +4,6 @@ import pl.miku.personallibrary.core.book.web.BookView;
 
 public class VolumeView {
     private long id;
-    private BookView bookView;
     private String isbn;
     private String volumeName;
     private long volumeNumber;
@@ -15,15 +14,6 @@ public class VolumeView {
 
     public VolumeView setId(long id) {
         this.id = id;
-        return this;
-    }
-
-    public BookView getBookView() {
-        return bookView;
-    }
-
-    public VolumeView setBookView(BookView bookView) {
-        this.bookView = bookView;
         return this;
     }
 

@@ -1,7 +1,6 @@
 package pl.miku.personallibrary.core.book.web;
 
 import pl.miku.personallibrary.core.author.web.AuthorView;
-import pl.miku.personallibrary.core.category.Category;
 import pl.miku.personallibrary.core.category.web.CategoryView;
 import pl.miku.personallibrary.core.volume.web.VolumeView;
 
