@@ -35,4 +35,40 @@ public class ContactInfo {
 
     @Column(name = "phone")
     private String phone;
+
+    public long getId() {
+        return id;
+    }
+
+    public ContactInfo setId(long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public ContactInfo setCustomer(Customer customer) {
+        this.customer = customer;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public ContactInfo setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public ContactInfo setPhone(String phone) {
+        this.phone = phone;
+        return this;
+    }
 }

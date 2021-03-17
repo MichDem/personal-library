@@ -31,4 +31,31 @@ public class Customer {
 
     @OneToMany(mappedBy = "custommers")
     private Set<ContactInfo> contactInfo;
+
+    public long getId() {
+        return id;
+    }
+
+    public Customer setId(long id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public Customer setFullName(String fullName) {
+        this.fullName = fullName;
+        return this;
+    }
+
+    public Set<ContactInfo> getContactInfo() {
+        return contactInfo;
+    }
+
+    public Customer setContactInfo(Set<ContactInfo> contactInfo) {
+        this.contactInfo = contactInfo;
+        return this;
+    }
 }
