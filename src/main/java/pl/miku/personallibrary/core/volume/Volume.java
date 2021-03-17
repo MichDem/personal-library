@@ -2,6 +2,7 @@ package pl.miku.personallibrary.core.volume;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import pl.miku.personallibrary.core.book.Book;
 
 import javax.persistence.*;
 
@@ -25,8 +26,9 @@ public class Volume {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "volume_id_seq")
     private long id;
 
-    @Column(name = "book_id")
-    private long bookId;
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book;
 
     @Column(name = "isbn")
     private String isbn;
@@ -46,12 +48,12 @@ public class Volume {
         return this;
     }
 
-    public long getBookId() {
-        return bookId;
+    public Book getBook() {
+        return book;
     }
 
-    public Volume setBookId(long bookId) {
-        this.bookId = bookId;
+    public Volume setBook(Book book) {
+        this.book = book;
         return this;
     }
 
