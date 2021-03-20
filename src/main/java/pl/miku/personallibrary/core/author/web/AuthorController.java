@@ -13,7 +13,6 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/author")
 public class AuthorController {
-
     private final AuthorService service;
 
     public AuthorController(AuthorService service) {
@@ -28,7 +27,9 @@ public class AuthorController {
 
     @GetMapping
     @ResponseBody
-    public Page<AuthorView> getAllAuthors(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+    public Page<AuthorView> getAllAuthors(
+            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable
+    ) {
         return service.findAllAuthors(pageable);
     }
 
@@ -41,12 +42,15 @@ public class AuthorController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAuthor(@PathVariable(name = "id") Long id, @RequestBody @Valid AuthorRequest request) {
+    public void deleteAuthor(@PathVariable(name = "id") Long id) {
         service.delete(id);
     }
 
     @PutMapping("/{id}")
-    public AuthorView updateAuthor(@PathVariable(name = "id") Long id, @RequestBody @Valid AuthorRequest request){
+    public AuthorView updateAuthor(
+            @PathVariable(name = "id") Long id,
+            @RequestBody @Valid AuthorRequest request
+    ){
         var author = service.findOrThrow(id);
         return service.update(author, request);
     }
