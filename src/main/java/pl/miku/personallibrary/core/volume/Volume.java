@@ -27,7 +27,7 @@ public class Volume {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "book_id", nullable = false)
+    @JoinColumn(name = "book_id", nullable = false, referencedColumnName = "id")
     private Book book;
 
     @Column(name = "isbn")

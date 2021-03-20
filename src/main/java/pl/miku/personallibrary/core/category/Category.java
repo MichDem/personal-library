@@ -30,11 +30,7 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "books")
-    @JoinTable(
-            name = "volumes",
-            joinColumns = {@JoinColumn(name = "book_id")}
-    )
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "categories")
     private Set<Book> books = new HashSet<>();
 
     public long getId() {

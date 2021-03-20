@@ -29,7 +29,7 @@ public class Customer {
     @Column(name = "full_name")
     private String fullName;
 
-    @OneToMany(mappedBy = "custommers")
+    @OneToMany(mappedBy = "customer")
     private Set<ContactInfo> contactInfo;
 
     public long getId() {

@@ -34,11 +34,7 @@ public class Book {
     private String title;
 
     @NotEmpty
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "volumes")
-    @JoinTable(
-            name = "volumes",
-            joinColumns = {@JoinColumn(name = "book_id")}
-    )
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "book")
     private Set<Volume> volumes = new HashSet<>();
 
     @NotEmpty
