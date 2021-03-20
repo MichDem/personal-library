@@ -18,7 +18,7 @@ public class Author {
             name = "author_id_seq",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "book_id_seq"),
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "author_id_seq"),
                     @org.hibernate.annotations.Parameter(name= "INCREMENT", value = "1"),
                     @org.hibernate.annotations.Parameter(name = "MINVALUE", value = "1"),
                     @org.hibernate.annotations.Parameter(name = "MAXVALUE", value = "2147483647"),
