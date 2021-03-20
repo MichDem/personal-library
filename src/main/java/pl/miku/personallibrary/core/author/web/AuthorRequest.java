@@ -2,14 +2,17 @@ package pl.miku.personallibrary.core.author.web;
 
 import pl.miku.personallibrary.base.BaseRequest;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public final class AuthorRequest extends BaseRequest {
     @NotNull
     private String fullname;
 
-    private long id;
+    @NotEmpty
+    private List<@Valid Id> books;
 
     public String getFullname() {
         return fullname;
@@ -20,12 +23,12 @@ public final class AuthorRequest extends BaseRequest {
         return this;
     }
 
-    public long getId() {
-        return id;
+    public List<Id> getBooks() {
+        return books;
     }
 
-    public AuthorRequest setId(long id) {
-        this.id = id;
+    public AuthorRequest setBooks(List<Id> books) {
+        this.books = books;
         return this;
     }
 }
