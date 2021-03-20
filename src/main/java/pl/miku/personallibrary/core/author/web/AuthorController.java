@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/author")
-public final class AuthorController {
+public class AuthorController {
 
     private final AuthorService service;
 
@@ -47,7 +47,7 @@ public final class AuthorController {
 
     @PutMapping("/{id}")
     public AuthorView updateAuthor(@PathVariable(name = "id") Long id, @RequestBody @Valid AuthorRequest request){
-        var author = service.findAuthorOrThrow(id);
+        var author = service.findOrThrow(id);
         return service.update(author, request);
     }
 }

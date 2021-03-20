@@ -1,7 +1,5 @@
 package pl.miku.personallibrary.base;
 
-import org.hibernate.query.criteria.internal.SelectionImplementor;
-
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;

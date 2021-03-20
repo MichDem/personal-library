@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-public final class AuthorRequest extends BaseRequest {
+public class AuthorRequest extends BaseRequest {
     @NotNull
     private String fullname;
 

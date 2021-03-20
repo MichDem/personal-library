@@ -33,13 +33,13 @@ public class AuthorService {
         this.authorToAuthorViewConverter = authorToAuthorViewConverter;
     }
 
-    public Author findAuthorOrThrow(Long id) {
+    public Author findOrThrow(Long id) {
         return authorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(messageUtil.getMessage("author.NotFound", id)));
     }
 
     public AuthorView getAuthor(Long id) {
-        var author = findAuthorOrThrow(id);
+        var author = findOrThrow(id);
         return authorToAuthorViewConverter.convert(author);
     }
 
