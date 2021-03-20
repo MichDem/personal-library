@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import pl.miku.personallibrary.base.BaseRequest;
+import pl.miku.personallibrary.core.contactInfo.ContactInfoRepository;
 import pl.miku.personallibrary.core.custommer.converter.CustomerToCustomerViewConverter;
 import pl.miku.personallibrary.core.custommer.web.CustomerRequest;
 import pl.miku.personallibrary.core.custommer.web.CustomerView;
@@ -13,17 +15,21 @@ import pl.miku.personallibrary.util.MessageUtil;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;
     private final MessageUtil messageUtil;
     private final CustomerToCustomerViewConverter customerToCustomerViewConverter;
+    private final ContactInfoRepository contactInfoRepository;
 
-    public CustomerService(CustomerRepository customerRepository, MessageUtil messageUtil, CustomerToCustomerViewConverter customerToCustomerViewConverter) {
+    public CustomerService(CustomerRepository customerRepository, MessageUtil messageUtil, CustomerToCustomerViewConverter customerToCustomerViewConverter, ContactInfoRepository contactInfoRepository) {
         this.customerRepository = customerRepository;
         this.messageUtil = messageUtil;
         this.customerToCustomerViewConverter = customerToCustomerViewConverter;
+        this.contactInfoRepository = contactInfoRepository;
     }
 
     public Customer findOrThrow(Long id) {
@@ -69,7 +75,13 @@ public class CustomerService {
     }
 
     private Customer prepare(Customer customer, CustomerRequest request) {
-        //TODO
+        customer.setFullName(request.getFullName());
+        var contactList = contactInfoRepository.findAllById(request.getContactId()
+                .stream()
+                .map(BaseRequest.Id::getId)
+                .collect(Collectors.toSet()));
+        var contacts = new HashSet<>(contactList);
+        customer.setContactInfo(contacts);
         return customer;
     }
 }

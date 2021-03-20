@@ -2,12 +2,11 @@ package pl.miku.personallibrary.core.book.web;
 
 import pl.miku.personallibrary.base.BaseRequest;
 
-import javax.persistence.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
-public class BookRequest {
+public class BookRequest extends BaseRequest {
     @NotEmpty
     private String title;
 

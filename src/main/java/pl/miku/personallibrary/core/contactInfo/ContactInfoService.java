@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pl.miku.personallibrary.core.contactInfo.converter.ContactInfoToContactInfoViewConverter;
 import pl.miku.personallibrary.core.contactInfo.web.ContactInfoRequest;
 import pl.miku.personallibrary.core.contactInfo.web.ContactInfoView;
+import pl.miku.personallibrary.core.custommer.CustomerRepository;
 import pl.miku.personallibrary.error.EntityNotFoundException;
 import pl.miku.personallibrary.util.MessageUtil;
 
@@ -19,11 +20,13 @@ public class ContactInfoService {
     private final ContactInfoRepository contactInfoRepository;
     private final MessageUtil messageUtil;
     private final ContactInfoToContactInfoViewConverter contactInfoToContactInfoViewConverter;
+    private final CustomerRepository customerRepository;
 
-    public ContactInfoService(ContactInfoRepository contactInfoRepository, MessageUtil messageUtil, ContactInfoToContactInfoViewConverter contactInfoToContactInfoViewConverter) {
+    public ContactInfoService(ContactInfoRepository contactInfoRepository, MessageUtil messageUtil, ContactInfoToContactInfoViewConverter contactInfoToContactInfoViewConverter, CustomerRepository customerRepository) {
         this.contactInfoRepository = contactInfoRepository;
         this.messageUtil = messageUtil;
         this.contactInfoToContactInfoViewConverter = contactInfoToContactInfoViewConverter;
+        this.customerRepository = customerRepository;
     }
 
     public ContactInfo findOrThrow(Long id) {
@@ -69,7 +72,11 @@ public class ContactInfoService {
     }
 
     private ContactInfo prepare(ContactInfo contactInfo, ContactInfoRequest request) {
-        //TODO
-        return contactInfo;
+        contactInfo.setEmail(request.getEmail())
+                .setPhone(request.getPhone());
+        var customer = customerRepository.findById(request.getCustomerId().getId())
+                .orElseThrow(() -> new EntityNotFoundException(messageUtil.getMessage("customer.NotFound", request.getCustomerId().getId())));
+        return contactInfo
+                .setCustomer(customer);
     }
 }

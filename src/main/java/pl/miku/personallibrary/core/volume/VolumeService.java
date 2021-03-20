@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import pl.miku.personallibrary.core.book.BookRepository;
 import pl.miku.personallibrary.core.volume.converter.VolumeToVolumeViewConverter;
 import pl.miku.personallibrary.core.volume.web.VolumeRequest;
 import pl.miku.personallibrary.core.volume.web.VolumeView;
@@ -19,11 +20,13 @@ public class VolumeService {
     private final VolumeRepository volumeRepository;
     private final MessageUtil messageUtil;
     private final VolumeToVolumeViewConverter volumeToVolumeViewConverter;
+    private final BookRepository bookRepository;
 
-    public VolumeService(VolumeRepository volumeRepository, MessageUtil messageUtil, VolumeToVolumeViewConverter volumeToVolumeViewConverter) {
+    public VolumeService(VolumeRepository volumeRepository, MessageUtil messageUtil, VolumeToVolumeViewConverter volumeToVolumeViewConverter, BookRepository bookRepository) {
         this.volumeRepository = volumeRepository;
         this.messageUtil = messageUtil;
         this.volumeToVolumeViewConverter = volumeToVolumeViewConverter;
+        this.bookRepository = bookRepository;
     }
 
     public Volume findOrThrow(Long id) {
@@ -69,7 +72,12 @@ public class VolumeService {
     }
 
     private Volume prepare(Volume volume, VolumeRequest request) {
-        //TODO
+        volume.setVolumeName(request.getVolumeName());
+        var book = bookRepository.findById(request.getBookId())
+                .orElseThrow(() -> new EntityNotFoundException(messageUtil.getMessage("book.NotFound", request.getBookId())));
+        volume.setBook(book)
+                .setVolumeNumber(request.getVolumeNumber())
+                .setIsbn(request.getIsbn());
         return volume;
     }
 }

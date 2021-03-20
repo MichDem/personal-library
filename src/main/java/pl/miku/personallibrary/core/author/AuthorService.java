@@ -9,7 +9,6 @@ import pl.miku.personallibrary.base.BaseRequest;
 import pl.miku.personallibrary.core.author.converter.AuthorToAuthorViewConverter;
 import pl.miku.personallibrary.core.author.web.AuthorRequest;
 import pl.miku.personallibrary.core.author.web.AuthorView;
-import pl.miku.personallibrary.core.book.Book;
 import pl.miku.personallibrary.core.book.BookRepository;
 import pl.miku.personallibrary.error.EntityNotFoundException;
 import pl.miku.personallibrary.util.MessageUtil;
@@ -81,7 +80,7 @@ public class AuthorService {
                 .stream()
                 .map(BaseRequest.Id::getId)
                 .collect(Collectors.toSet()));
-        var books = new HashSet<Book>(bookList);
+        var books = new HashSet<>(bookList);
         author.setBooks(books);
         return author;
     }
